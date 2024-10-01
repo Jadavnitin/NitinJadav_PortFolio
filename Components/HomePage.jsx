@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import Header from './Header';
-// import mainlogo from "../Images/MainLogo.jpg"
+import mainlogo from "../Images/MainLogo.jpg"
 import styled from 'styled-components';
-// import boylogo from "../Images/Boy.jpeg"
+import boylogo from "../Images/Boy.jpeg"
 
 
 const HomePage = () => {
