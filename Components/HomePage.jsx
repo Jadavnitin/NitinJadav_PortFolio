@@ -111,10 +111,10 @@ padding: 15vmin 40vmax ;
 
 
 const MainImg = styled.div`
-  height:40vmax;
+  height: 40vmax;
   width: 40vmax; 
   border-radius: 100%; 
-  background-image: url('../Images/MainLogo.jpg'); 
+  background-image: url('/Images/MainLogo.jpg'); // Adjusted path
   background-size: cover; 
   background-position: center; 
   box-shadow: 8px 8px 15px rgba(255, 255, 255, 0.25), -8px -8px 15px rgba(0, 0, 0, 0.25);
@@ -280,15 +280,13 @@ color: white;
 // `;
 
 const AboutImageDiv = styled.div`
-
-  height:40vmax;
+  height: 40vmax;
   width: 40vmax; 
   border-radius: 20px; 
-  background-image: url('../Images/Boy.jpeg'); 
+  background-image: url('/Images/Boy.jpeg'); // Adjusted path
   background-size: cover; 
   background-position: center; 
   box-shadow: 8px 8px 15px rgba(255, 255, 255, 0.25), -8px -8px 15px rgba(0, 0, 0, 0.25);
-
 `;
 
 const AboutMeIntroDuction = styled.div`
