@@ -113,7 +113,7 @@ const MainImg = styled.div`
   height: 40vmax;
   width: 40vmax; 
   border-radius: 100%; 
-  background-image: url('/.netlify/public/Images/MainLogo.jpg'); // Adjusted path
+  background-image: url('/public/Images/MainLogo.jpg'); // Adjusted path
   background-size: cover; 
   background-position: center; 
   box-shadow: 8px 8px 15px rgba(255, 255, 255, 0.25), -8px -8px 15px rgba(0, 0, 0, 0.25);
@@ -282,7 +282,7 @@ const AboutImageDiv = styled.div`
   height: 40vmax;
   width: 40vmax; 
   border-radius: 20px; 
-  background-image: url('/.netlify/public/Images/Boy.jpeg'); // Adjusted path
+  background-image: url('/public/Images/Boy.jpeg'); // Adjusted path
   background-size: cover; 
   background-position: center; 
   box-shadow: 8px 8px 15px rgba(255, 255, 255, 0.25), -8px -8px 15px rgba(0, 0, 0, 0.25);
