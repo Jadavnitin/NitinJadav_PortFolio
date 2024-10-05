@@ -2,7 +2,9 @@ import React, { useRef } from 'react';
 import Header from './Header';
 import styled from 'styled-components';
 import githublinkimg from "/Images/Vector.png"
-
+import LeftBtn from "../public/Images/LeftBtn.png"
+import RightBtn from "../public/Images/RightBtn.png"
+import Rectangle from "../public/Images/ReactLogo.jpg"
 
 const HomePage = () => {
 
@@ -17,11 +19,7 @@ const HomePage = () => {
          <HomePageDiv>
             <Main>
                <Header refs={{ CertificateSection, ResumeSection, AboutSection, ProjectsSection, ContactSection }} />
-               <MainImg>
-
-                  {/* <img src={mainlogo} alt="mainlogo" /> */}
-
-               </MainImg>
+               <MainImg></MainImg>
                <Div>
                   <Hey>Hey</Hey>
                   <Name>I’m Nitin Jadav</Name>
@@ -58,7 +56,6 @@ const HomePage = () => {
 
 
                <ProjectsSections ref={ProjectsSection}>
-
                   <ProjectTiltle>Projects</ProjectTiltle>
                   <HoriZontalLine></HoriZontalLine>
                   <ProjectButtonDiv>
@@ -81,12 +78,99 @@ const HomePage = () => {
                   </ProjectMainCard>
                </ProjectsSections>
 
+               <SkillSection ref={ResumeSection}>
+                  <SkillTitle>Skills</SkillTitle>
+                  <HoriZontalLine></HoriZontalLine>
+
+                  <SkillMainDiv>
+                     <LangBtnDiv>
+                        <button>Languages</button>
+                     </LangBtnDiv>
+
+                     <LanguageImgDiv>
+                        <img src={Rectangle} alt="Rectangle" />
+                     </LanguageImgDiv>
+                     <SideBtn>
+                        <LeftSide><img src={LeftBtn} alt="LeftBtn" /></LeftSide>
+                        <RightSide><img src={RightBtn} alt="RightBtn" /></RightSide>
+                     </SideBtn>
+                  </SkillMainDiv>
+               </SkillSection>
+
+               <CertificateSections ref={CertificateSection}>
+                  <CertificateTiltle>Certifications</CertificateTiltle>
+                  <HoriZontalLine></HoriZontalLine>
+                  <CertificationAllImage>
+                     <CertificationImage1></CertificationImage1>
+                     <CertificationImage2></CertificationImage2>
+                     <CertificationImage3></CertificationImage3>
+                  </CertificationAllImage>
+               </CertificateSections>
 
 
 
-               <CertificateSections ref={CertificateSection}>certificaate page</CertificateSections>
-               <ResumeSections ref={ResumeSection}>Resume Page</ResumeSections>
-               <ContactSections ref={ContactSection}>Contact Page</ContactSections>
+
+               <ContactSections ref={ContactSection}>
+                  <ContactTiltle>Contact Me</ContactTiltle>
+                  <HoriZontalLine></HoriZontalLine>
+                  <ContactFormDiv>
+                     <ContactImg></ContactImg>
+                     <ContactForm>
+                        <input type="text" placeholder='Name*' />
+                        <input type="email" placeholder='Email Id*' />
+                        <input type="text" placeholder='Message*' className='message-me' />
+                        <SendBtnDiv>
+                           <button>Send</button>
+                        </SendBtnDiv>
+                     </ContactForm>
+                  </ContactFormDiv>
+               </ContactSections>
+
+
+               <ExperinceSection ref={ResumeSection}>
+                  <Experiencetitle>Experience</Experiencetitle>
+                  <HoriZontalLine></HoriZontalLine>
+
+
+                  <ExperinceAndEducationButton>
+                     <ExperinceBtn>Experience</ExperinceBtn>
+                     <EducationBtn>Education</EducationBtn>
+                  </ExperinceAndEducationButton>
+
+                  <ExperinceAllCard>
+                     <ExperinceCard1>
+                        <Card1>
+                           <CardH1>Technical Content Writer</CardH1>
+                           <CardP>GeeksforGeeks | 11-2023 – 02-2024</CardP>
+                           <CardSpan>As a content creator, I've authored and published
+                              numerous articles on technical topics like Power BI, Python,
+                              Data Science, and Machine Learning. My focus is on simplifying
+                              complex concepts, ensuring accessibility for all audiences.
+                              Each article is carefully crafted to translate intricate jargon
+                              into easily understandable terms, fostering a deep understanding.
+                              I stay current with the latest developments in these fields, delivering
+                              up-to-date content that
+                              empowers readers to navigate and excel in the ever-evolving landscape of technology.</CardSpan>
+                        </Card1>
+                     </ExperinceCard1>
+                     <ExperinceCard2>
+                        <Card2>
+                           <CardH1>Technical Content Writer</CardH1>
+                           <CardP>GeeksforGeeks | 11-2023 – 02-2024</CardP>
+                           <CardSpan>As a content creator, I've authored and published numerous
+                              articles on technical topics like Power BI, Python, Data Science,
+                              and Machine Learning. My focus is on simplifying complex concepts,
+                              ensuring accessibility for all audiences. Each article is carefully
+                              crafted to translate intricate jargon into easily understandable terms,
+                              fostering a deep understanding. I stay current with the latest developments
+                              in these fields, delivering up-to-date content that empowers
+                              readers to navigate and excel in the ever-evolving landscape of technology.</CardSpan>
+                        </Card2>
+                     </ExperinceCard2>
+                  </ExperinceAllCard>
+               </ExperinceSection>
+
+
             </Main>
          </HomePageDiv>
       </>
@@ -94,6 +178,358 @@ const HomePage = () => {
 }
 
 export default HomePage
+
+
+
+
+const ExperinceSection = styled.section`
+width: 80vmax;
+display: flex;
+flex-direction: column;
+justify-content: center;
+color: white;
+font-size: 34px;
+font-weight: 500;
+gap: 20px;
+margin-top: 150px;
+`;
+
+const ExperinceAndEducationButton = styled.div`
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 50px;
+margin-block: 50px;
+`;
+
+const ExperinceBtn = styled.button`
+    background-color: #7733FF;
+    width: 253px;
+    height: 60px;
+    border-radius: 24px;
+    border: none;
+    font-size: 20px;
+    font-weight:600;
+
+`;
+const EducationBtn = styled.button`
+    background-color:#24272C;
+    width: 253px;
+    height: 60px;
+    border-radius: 24px;
+    border: none;
+    font-size: 20px;
+    font-weight:600;
+    box-shadow:-5px -5px 10px rgba(255, 255, 255, 0.25), 5px 5px 10px rgba(0,0 ,0,25) ;
+`;
+
+const ExperinceAllCard = styled.div`
+width:80vmax;
+height:80vmax;
+display: flex;
+justify-content: center;
+
+
+`;
+
+const ExperinceCard1 = styled.div`
+width:60vmax;
+height:37vmax;
+margin-top: 100px;
+display: flex;
+
+`;
+
+const ExperinceCard2 = styled.div`
+width:60vmax;
+height:37vmax;
+align-self: flex-end;
+
+`;
+
+const Card1 = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align:left;
+width:30vmax;
+height:37vmax;
+flex-direction: column;
+text-align: left;
+gap:0.5vmax;
+border-radius: 24px;
+box-shadow:-5px -5px 10px rgba(255, 255, 255, 0.25), 5px 5px 10px rgba(0,0 ,0,25) ;
+padding:4px 6px;
+
+`;
+
+
+const CardH1 = styled.h1`
+font-size:21px;
+font-weight: 600; 
+white-space: nowrap;
+margin: 0;
+padding: 0;
+
+`;
+const CardP = styled.p`
+font-size:17px;
+font-weight:500;
+white-space: nowrap;
+margin: 0;
+padding: 0;
+
+
+
+`;
+const CardSpan = styled.p`
+font-size:13px;
+font-weight:500;
+margin: 0;
+padding: 0;
+
+
+
+`;
+
+
+const Card2 = styled.div`
+width:30vmax;
+height:37vmax;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align:left;
+padding:4px 6px;
+gap:0.5vmax;
+border-radius: 24px;
+box-shadow:-5px -5px 10px rgba(255, 255, 255, 0.25), 5px 5px 10px rgba(0,0 ,0,25) ;
+
+`;
+
+
+
+
+
+
+const Experiencetitle = styled.p`
+margin: 0;
+padding: 0;
+align-self: flex-end;
+`;
+
+const SideBtn = styled.div`
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+`;
+
+const SkillMainDiv = styled.div`
+  position: relative;
+  width: 80vmax;
+  height: 74vmax;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+ 
+`;
+
+const RightSide = styled.button`
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  align-items: center;
+  padding: 4px 6px;
+  width: 59px;
+  height: 40px;
+  border-radius: 11px;
+  background-color: #232732;
+  box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.25), 6px 6px 12px rgba(0, 0, 0, 0.25);
+`;
+
+const LeftSide = styled.button`
+  display: flex;
+  margin-left:10px;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 6px;
+  width: 59px;
+  height: 40px;
+  border-radius: 11px;
+  background-color: #232732;
+  
+`;
+
+const LangBtnDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -50px;
+
+  button {
+    background-color: #7733FF;
+    width: 253px;
+    height: 60px;
+    border-radius: 24px;
+    border: none;
+    font-size: 20px;
+    font-weight:600;
+  }
+`;
+
+const LanguageImgDiv = styled.div`
+  height:64vmax;
+  width:64vmax;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+  
+  
+  img{
+  height:30vmax;
+  width:30vmax;
+  border-radius:100%;
+  box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.25), 6px 6px 12px rgba(0, 0, 0, 0.25);
+  }
+ 
+  
+`;
+
+const SkillSection = styled.section`
+  width: 80vmax;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-size: 34px;
+  font-weight: 500;
+  gap: 20px;
+`;
+
+const SkillTitle = styled.p`
+margin: 0;
+padding: 0;
+align-self: flex-end;
+`;
+
+
+const ContactSections = styled.section`
+width: 80vmax;
+display: flex;
+flex-direction: column;
+justify-content: center;
+color: white;
+font-size: 34px;
+font-weight: 500;
+gap: 20px;
+
+`;
+
+const ContactTiltle = styled.p`
+margin: 0;
+padding: 0;
+`;
+
+const ContactFormDiv = styled.div`
+width: 100%;
+height: 50vmax;
+display: flex;
+justify-content:space-between;
+align-items: center;
+margin-top:50px;
+
+  @media screen and (max-width:700px) , (max-height:700px){
+   margin-top: 120px;
+}
+`;
+
+
+const ContactImg = styled.div`
+
+  width: 40%;
+  height:70%;
+  background-image: url('/Images/ContactBoy.jpg');
+  background-size: cover; 
+  background-position: center; 
+  box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.25), 8px 8px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 24px; 
+  
+  
+  @media screen and (max-width:600px) , (max-height:600px){
+   display: none;
+   
+}
+`;
+const ContactForm = styled.div`
+height:50vmax;
+width:50%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+gap:20px;
+
+
+.message-me{
+   padding: 30px 0px 200px 20px;
+   margin-bottom: 20px;
+   
+   }
+
+input{
+height:5vmax;
+width:100%;
+background-color:white;
+border-radius:12px;
+font-size: 22px;
+font-weight: 500;
+padding: 20px;
+background-color: #232732;
+outline: none;
+box-shadow: 1px 1px 2px rgba(44, 50, 64, 0.3) ,-1px -1px 2px  rgba(26,27,38, 0.5)  , 
+inset -4px 4px 8px  rgba(26,27,38, 0.2)  ,inset 4px -4px 8px  rgba(26,27,38, 0.2),
+inset -4px -4px 8px  rgba(44,50,64, 0.9) ,inset 4px 4px 10px  rgba(26,27,38, 0.9)
+   ;
+   
+   ::placeholder{
+      color: #83858C;
+     text-align: center;
+      
+      
+   }
+
+}
+
+
+
+@media screen and  (max-width:600px) ,(max-height:600px){
+   width:100%;
+}
+
+`;
+
+const SendBtnDiv = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+
+
+button{
+   background-color:#24272C;
+   width: 148px;
+   height: 60px;
+   border-radius: 24px;
+   border: none;
+   box-shadow:-5px -5px 10px rgba(255, 255, 255, 0.25), 5px 5px 10px rgba(0,0 ,0,25) ;
+   font-size:22px;
+   color: inherit;
+}
+`;
 
 const HomePageDiv = styled.section`
 margin-top: 10vmin;
@@ -116,6 +552,7 @@ justify-content: center;
 flex-direction: column;
 gap: 40px;
 padding: 15vmin 40vmax ;
+
 
 `;
 
@@ -229,26 +666,7 @@ gap: 20px;
 
 `;
 
-const CertificateSections = styled.section`
-width: 90vmax;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-font-size: 90px;
-color: white;
 
-`;
-const ResumeSections = styled.section`
-width: 90vmax;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-font-size: 90px;
-color: white;
-
-`;
 const AboutSections = styled.section`
 display: flex;
 flex-direction: row;
@@ -317,15 +735,7 @@ h1{
 
 `;
 
-const ContactSections = styled.section`
-width: 90vmax;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 90px;
-color: white;
 
-`;
 
 const ProjectsSections = styled.section`
 width: 80vmax;
@@ -482,4 +892,62 @@ const Projectimages3 = styled.div`
   background-position: center; 
   box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.25), 8px 8px 15px rgba(0, 0, 0, 0.25);
   border-radius: 100%; 
+`;
+
+const CertificateSections = styled.section`
+width: 80vmax;
+display: flex;
+flex-direction: column;
+justify-content: center;
+color: white;
+font-size: 34px;
+font-weight: 500;
+gap: 20px;
+
+
+`;
+const CertificationAllImage = styled.div`
+width:80vmax;
+height:35vmax;
+margin-top:50px;
+padding-top: 20px;
+display: flex;
+align-items: center;
+justify-content:space-between;
+
+`;
+
+const CertificationImage1 = styled.div`
+width:15vmax;
+height:20vmax;
+background-image: url('/Images/FrontEnd_libraries_certificate.png');
+background-size:cover; 
+background-position: center; 
+border-radius:1vmax;
+
+
+
+`;
+const CertificationImage2 = styled.div`
+width:30vmax;
+height:35vmax;
+background-image: url('/Images/responive_certificate.png');
+background-size:cover; 
+background-position:center; 
+border-radius:1vmax;
+
+
+`;
+const CertificationImage3 = styled.div`
+width:15vmax;
+height:20vmax;
+background-image: url('/Images/FrontEnd_libraries_certificate.png');
+background-size:cover; 
+background-position:center; 
+border-radius:1vmax;
+
+`;
+const CertificateTiltle = styled.p`
+margin: 0;
+padding: 0;
 `;
