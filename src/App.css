@@ -10,8 +10,12 @@
    color: white;
  
 
+   
+   
 
 }
+
+
 
 body {
    width: 100vmax;
@@ -19,5 +23,6 @@ body {
    justify-content: center;
    align-items: center;
    background-color: #24272C;
+   user-select: none;
 }
 

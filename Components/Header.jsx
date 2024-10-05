@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Menu from "../public/Images/Menu.png";
 import Cross from "../public/Images/cross.svg";
 
+
+
+
 const Header = ({ refs}) => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -56,6 +59,9 @@ const HeaderDiv = styled.div`
    justify-content: space-between;
    padding: 0 2rem;
    position: relative;
+  
+   
+
    
 
 `;
@@ -73,15 +79,23 @@ const HeaderMenu = styled.div`
 
    cursor: pointer;
    width:80vmax;
-   height:10vh;
+   min-height:10vh;
    display: flex;
    justify-content: flex-end;
    align-items: center;
-
+   outline: none;
+    
+   
+  
+   
 
    @media screen and (min-width: 971px) {
       display: none;
+      
+      
    }
+   
+ 
 `;
 
 const CrossMenu = styled(({ isOpen, ...props }) => <div {...props} />)`
@@ -140,9 +154,12 @@ const Button = styled.button`
    font-size: 22px;
    cursor: pointer;
    margin: 0.5rem; 
+  
 
    @media screen and (max-width: 970px) {
       width: 100%; 
       margin-bottom: 1rem; 
    }
+   
+   
 `;
