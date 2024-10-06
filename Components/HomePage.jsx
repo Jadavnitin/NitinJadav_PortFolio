@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from './Header';
 import styled from 'styled-components';
 import githublinkimg from "/Images/Vector.png"
 import LeftBtn from "../public/Images/LeftBtn.png"
 import RightBtn from "../public/Images/RightBtn.png"
 import Rectangle from "../public/Images/ReactLogo.jpg"
+
 
 const HomePage = () => {
 
@@ -13,6 +14,49 @@ const HomePage = () => {
    const AboutSection = useRef();
    const ProjectsSection = useRef();
    const ContactSection = useRef();
+   
+   
+   const[displayedText, setDisplayedText] = useState('');
+   const [wordIndex, setWordIndex] = useState(0);
+   const [isTyping, setIsTyping] = useState(true);
+   const [index, setIndex] = useState(0); 
+
+   const words = ["Engineer", "Web Devloper"];
+
+   useEffect(() => {
+      const interval = setInterval(() => {
+         if (isTyping) {
+            if (index < words[wordIndex].length) {
+               setDisplayedText((prev) => prev + words[wordIndex][index]);
+               setIndex((prev) => prev + 1); 
+            } else {
+               setIsTyping(false);
+               clearInterval(interval);
+               setTimeout(() => {
+                  setIsTyping(true);
+                  setDisplayedText('');
+                  setWordIndex((prev) => (prev + 1) % words.length);
+                  setIndex(0); 
+               }, 1000);
+            }
+         } else {
+            if (displayedText.length > 0) {
+               setDisplayedText((prev) => prev.slice(0, -1));
+            } else {
+               setIsTyping(true); 
+               setIndex(0); 
+            }
+         }
+      }, 150);
+
+      return () => clearInterval(interval);
+   }, [wordIndex, isTyping, displayedText, index]); 
+
+
+
+
+
+   
 
    return (
       <>
@@ -23,7 +67,7 @@ const HomePage = () => {
                <Div>
                   <Hey>Hey</Hey>
                   <Name>I’m Nitin Jadav</Name>
-                  <Profession>Computer<span>Engineer</span></Profession>
+                  <Profession>I’m <span>{displayedText}</span></Profession>
                   <Introduction>
                      Creative web developer skilled in HTML, CSS, and JavaScript,
                      dedicated to building engaging and user-friendly web  applications.
