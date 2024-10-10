@@ -5,7 +5,10 @@ import githublinkimg from "/Images/Vector.png"
 import LeftBtn from "../public/Images/LeftBtn.png"
 import RightBtn from "../public/Images/RightBtn.png"
 import Rectangle from "../public/Images/ReactLogo.jpg"
-
+import htmlImage from "../public/Images/Image_1.jpg";
+import cssImage from "../public/Images/Image_2.jpg";
+import jsImage from "../public/Images/Image_3.jpg";
+import emailjs from 'emailjs-com';
 
 const HomePage = () => {
 
@@ -14,12 +17,49 @@ const HomePage = () => {
    const AboutSection = useRef();
    const ProjectsSection = useRef();
    const ContactSection = useRef();
-   
-   
-   const[displayedText, setDisplayedText] = useState('');
+
+
+   const ContactMeBtn = (section) => {
+      window.scrollTo({ top: section.current.offsetTop, behavior: "smooth" });
+
+   };
+
+   const [selectedProjects, setSelectedProjects] = useState('HTML');
+   const [selectedTech, setSelectedTech] = useState('HTML');
+
+
+
+
+   const handleButtonClick = (Project) => {
+      console.log(Project);
+      setSelectedProjects(Project);
+      setSelectedTech(Project);
+
+   }
+
+
+   const getImage = () => {
+      switch (selectedProjects) {
+         case 'HTML':
+            return htmlImage;
+
+         case 'CSS':
+            return cssImage;
+
+         case 'JavaScript':
+            return jsImage;
+
+         default:
+            return htmlImage;
+      }
+   };
+
+
+
+   const [displayedText, setDisplayedText] = useState('');
    const [wordIndex, setWordIndex] = useState(0);
    const [isTyping, setIsTyping] = useState(true);
-   const [index, setIndex] = useState(0); 
+   const [index, setIndex] = useState(0);
 
    const words = ["Engineer", "Web Devloper"];
 
@@ -28,7 +68,7 @@ const HomePage = () => {
          if (isTyping) {
             if (index < words[wordIndex].length) {
                setDisplayedText((prev) => prev + words[wordIndex][index]);
-               setIndex((prev) => prev + 1); 
+               setIndex((prev) => prev + 1);
             } else {
                setIsTyping(false);
                clearInterval(interval);
@@ -36,27 +76,85 @@ const HomePage = () => {
                   setIsTyping(true);
                   setDisplayedText('');
                   setWordIndex((prev) => (prev + 1) % words.length);
-                  setIndex(0); 
+                  setIndex(0);
                }, 1000);
             }
          } else {
             if (displayedText.length > 0) {
                setDisplayedText((prev) => prev.slice(0, -1));
             } else {
-               setIsTyping(true); 
-               setIndex(0); 
+               setIsTyping(true);
+               setIndex(0);
             }
          }
       }, 150);
 
       return () => clearInterval(interval);
-   }, [wordIndex, isTyping, displayedText, index]); 
+   }, [wordIndex, isTyping, displayedText, index]);
 
 
+   const [name, setName] = useState('');
+   const [email, setEmail] = useState('');
+   const [message, setMessage] = useState('');
+   const [errors, setErrors] = useState({ name: '', email: '', message: '' });
+   const [isSubmitted, setIsSubmitted] = useState(false);
 
+   const validateEmail = (email) => {
+      const regex = /\S+@\S+\.\S+/;
+      return regex.test(email);
+   };
 
+   const handleSubmit = (event) => {
+      event.preventDefault();
+      let newErrors = { name: '', email: '', message: '' };
+      let valid = true;
 
-   
+      if (!name) {
+         newErrors.name = 'Name is required.';
+         valid = false;
+      }
+
+      if (!email) {
+         newErrors.email = 'Valid email is required.';
+         valid = false;
+      } else if (!validateEmail(email)) {
+         newErrors.email = 'Email format is invalid.';
+         valid = false;
+      }
+
+      if (!message) {
+         newErrors.message = 'Message is required.';
+         valid = false;
+      }
+
+      setErrors(newErrors);
+
+      if (valid) {
+         const templateParams = {
+            name:name,
+            email:email,
+            message:message,
+         };
+
+         emailjs.send('service_7r63tv1', 'template_x1dx3ss', templateParams, 'xckbZl_1S7H9SUUlw')
+            .then((response) => {
+               console.log('Email sent successfully!', response.status, response.text);
+               alert('Message sent successfully!');
+               resetForm();
+            })
+            .catch((error) => {
+               console.error('Error sending email:', error);
+               alert('Failed to send message. Please try again later.');
+            });
+      }
+   };
+
+   const resetForm = () => {
+      setName('');
+      setEmail('');
+      setMessage('');
+      setErrors({ name: '', email: '', message: '' });
+   };
 
    return (
       <>
@@ -77,7 +175,7 @@ const HomePage = () => {
 
                   <ButtonDiv>
                      <ButtonLearnMore>Learn More</ButtonLearnMore>
-                     <ButtonContactMe>Contact Me</ButtonContactMe>
+                     <ButtonContactMe ref={ContactSection} onClick={() => ContactMeBtn(ContactSection)}>Contact Me</ButtonContactMe>
                   </ButtonDiv>
                </Div>
 
@@ -103,18 +201,25 @@ const HomePage = () => {
                   <ProjectTiltle>Projects</ProjectTiltle>
                   <HoriZontalLine></HoriZontalLine>
                   <ProjectButtonDiv>
-                     <button>HTML</button>
-                     <button>CSS</button>
-                     <button>JavaScript</button>
+                     {['HTML', 'CSS', 'JavaScript'].map((project) => (
+                        <ProjectButton
+                           key={project}
+                           type="button"
+                           onClick={() => handleButtonClick(project)}
+                           isActive={selectedProjects === project}
+                        >
+                           {project}
+                        </ProjectButton>
+                     ))}
                   </ProjectButtonDiv>
                   <ProjectMainCard>
                      <ProjectAllImage>
-                        <Projectimages1></Projectimages1>
-                        <Projectimages2></Projectimages2>
-                        <Projectimages3></Projectimages3>
+                        <Projectimages1 selectedTech={selectedTech}></Projectimages1>
+                        <Projectimages2 selectedTech={selectedTech}></Projectimages2>
+                        <Projectimages3 selectedTech={selectedTech}></Projectimages3>
                      </ProjectAllImage>
                      <Projectcard>
-                        <CardImg></CardImg>
+                        <CardImg backgroundImage={getImage()} alt={`${selectedProjects} project`} />
                         <CardTitle>Content Analyzer</CardTitle>
                         <ProjectText> A robust tool designed for content creators, bloggers, and writers</ProjectText>
                         <img src={githublinkimg} alt="githublinkimg" />
@@ -159,12 +264,63 @@ const HomePage = () => {
                   <HoriZontalLine></HoriZontalLine>
                   <ContactFormDiv>
                      <ContactImg></ContactImg>
-                     <ContactForm>
-                        <input type="text" placeholder='Name*' />
-                        <input type="email" placeholder='Email Id*' />
-                        <input type="text" placeholder='Message*' className='message-me' />
+                     <ContactForm onSubmit={handleSubmit}>
+
+                        {isSubmitted && errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
+                        <input type="text"
+                           placeholder="Name"
+                           value={name}
+                           name='name'
+                           onChange={(e) => {
+                              setName(e.target.value);
+                              if (isSubmitted) {
+                                 setErrors((prevErrors) => ({ ...prevErrors, name: '' }));
+                              }
+                           }}
+                        />
+
+
+
+
+                        {isSubmitted && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+                        <input type="email"
+                           placeholder="Email"
+                           value={email}
+                           name='email'
+                           onChange={(e) => {
+                              setEmail(e.target.value);
+
+                              if (isSubmitted) {
+                                 setErrors((prevErrors) => ({ ...prevErrors, email: '' }));
+                              }
+
+                              if (e.target.value && !validateEmail(e.target.value)) {
+                                 setErrors((prevErrors) => ({ ...prevErrors, email: 'Email format is invalid.' }));
+                              } else {
+                                 setErrors((prevErrors) => ({ ...prevErrors, email: '' }));
+                              }
+                           }} />
+
+
+
+
+                        {isSubmitted && errors.message && <ErrorMessage>{errors.message}</ErrorMessage>}
+                        <input placeholder="Message"
+                           value={message}
+                           className='message-me'
+                           name='message'
+                           onChange={(e) => {
+                              setMessage(e.target.value);
+
+                              if (isSubmitted) {
+                                 setErrors((prevErrors) => ({ ...prevErrors, message: '' }));
+                              }
+                           }} />
+
+
+
                         <SendBtnDiv>
-                           <button>Send</button>
+                           <button type="submit">Send</button>
                         </SendBtnDiv>
                      </ContactForm>
                   </ContactFormDiv>
@@ -223,6 +379,31 @@ const HomePage = () => {
 
 export default HomePage
 
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-size:21px;
+  margin-top: 10px;
+
+`;
+
+const ProjectButton = styled(({ isActive, ...props }) => <button {...props} />)`
+width: 15vmax;
+height: 3vh;
+cursor: pointer;
+box-sizing:content-box;
+display:flex;
+padding:4vmin 6vmin;
+align-items:center;
+justify-content:center;
+border-radius: 24px;
+box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.25), 5px 5px 10px rgba(0, 0, 0, 25);
+font-size: 22px;
+border: none;
+color: inherit;
+background-color: ${({ isActive }) => (isActive ? 'teal' : '#24272C')};;
+
+`;
 
 
 
@@ -485,11 +666,16 @@ height: 50vmax;
 display: flex;
 justify-content:space-between;
 align-items: center;
-margin-top:50px;
+margin-top:90px;
 
   @media screen and (max-width:700px) , (max-height:700px){
    margin-top: 120px;
 }
+
+ @media screen and (max-width:900px) {
+   margin-top: 180px;
+}
+
 `;
 
 
@@ -509,7 +695,7 @@ const ContactImg = styled.div`
    
 }
 `;
-const ContactForm = styled.div`
+const ContactForm = styled.form`
 height:50vmax;
 width:50%;
 display: flex;
@@ -524,6 +710,8 @@ gap:20px;
    margin-bottom: 20px;
    
    }
+   
+   
 
 input{
 height:5vmax;
@@ -548,7 +736,6 @@ inset -4px -4px 8px  rgba(44,50,64, 0.9) ,inset 4px 4px 10px  rgba(26,27,38, 0.9
    }
 
 }
-
 
 
 @media screen and  (max-width:600px) ,(max-height:600px){
@@ -824,17 +1011,15 @@ img{
 }
 
 `;
-const CardImg = styled.div`
+export const CardImg = styled(({ backgroundImage, ...props }) => <div {...props} />)`
 width: 90%;
 height:60%;
 margin:20px 10px 0px 10px;
-background-image: url('/Images/Image_1.jpg');
+background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
 box-shadow: 4px 4px 7.5px rgba(255, 255, 255, 0.25), -4px -4px 7.5px rgba(0, 0, 0, 0.25);
 background-size: cover; 
 background-position: center; 
 border-radius: 16px;
-
- 
 `;
 
 const CardTitle = styled.p`
@@ -871,26 +1056,15 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 
-button{
-   width: 15vmax;
-   height: 3vh;
-   box-sizing: content-box;
-   display: flex;   
-   padding: 4vmin 6vmin;
-   align-items: center;
-   justify-content: center;
-   border-radius: 24px;
-   border: none;
-   box-shadow:-5px -5px 10px rgba(255, 255, 255, 0.25), 5px 5px 10px rgba(0,0 ,0,25) ;
-   font-size:22px;
-   color: inherit;
-   background-color:#24272C;
-}
 
 `;
 
-const ProjectAllImage = styled.div`
-  width: 238px;
+
+
+
+export const ProjectAllImage = styled.div`
+  width: 238px; 
+  transition: border 0.3s ease;
   height: 688px;
   display: flex;
   flex-direction: column;
@@ -905,10 +1079,12 @@ const ProjectAllImage = styled.div`
   }
 `;
 
-const Projectimages1 = styled.div`
+const Projectimages1 = styled(({ selectedTech, ...props }) => <div {...props} />)`
   width: 80%;
   height: auto;
   aspect-ratio: 1; 
+  border: 2px solid ${({ selectedTech }) => (selectedTech === "HTML" ? 'teal' : 'transparent')}; // Change color as needed
+  transition: border 0.3s ease;
   background-image: url('/Images/Image_1.jpg');
   background-size: cover; 
   background-position: center; 
@@ -916,10 +1092,12 @@ const Projectimages1 = styled.div`
   border-radius: 100%; 
 `;
 
-const Projectimages2 = styled.div`
+const Projectimages2 = styled(({ selectedTech, ...props }) => <div {...props} />)`
   width: 80%;
   height: auto;
   aspect-ratio: 1; 
+  border: 2px solid ${({ selectedTech }) => (selectedTech === "CSS" ? 'teal' : 'transparent')}; // Change color as needed
+  transition: border 0.3s ease;
   background-image: url('/Images/Image_2.jpg');
   background-size: cover; 
   background-position: center; 
@@ -927,10 +1105,12 @@ const Projectimages2 = styled.div`
   border-radius: 100%; 
 `;
 
-const Projectimages3 = styled.div`
+const Projectimages3 = styled(({ selectedTech, ...props }) => <div {...props} />)`
   width: 80%;
   height: auto;
   aspect-ratio: 1; 
+  border: 2px solid ${({ selectedTech }) => (selectedTech === "JavaScript" ? 'teal' : 'transparent')};
+  transition: border 0.3s ease;
   background-image: url('/Images/Image_3.jpg');
   background-size: cover; 
   background-position: center; 

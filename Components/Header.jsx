@@ -178,7 +178,7 @@ import styled from 'styled-components';
 import Menu from "../public/Images/Menu.png";
 import Cross from "../public/Images/cross.svg";
 
-const Header = ({ refs }) => {
+const Header = ({ refs}) => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const firstButtonRef = useRef(null);
    const menuButtonRef = useRef(null);
